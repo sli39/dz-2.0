@@ -1,0 +1,32 @@
+.App {
+    --header_height: 60px;
+}
+
+.hw {
+
+}
+
+.hwTitle {
+
+}
+.container {
+    width: 1280px;
+    /*height: 720px;*/
+    margin: 0 auto; /* Центрирование по горизонтали */
+    padding: 70px;   /* Отступы, можешь изменить */
+    box-sizing: border-box;
+    background-color: #ffffff; /* или нужный фон */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.content{
+
+    padding-top: 130px;
+}
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: #d9d9d9;
+    margin: 20px 0;
+}

@@ -1,0 +1,56 @@
+.message {
+    display: flex;
+    justify-content: flex-end; /* Сообщение справа */
+    margin-bottom: 12px;
+}
+
+.imageAndText {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-direction: row-reverse; /* Переносим аватар вправо */
+    padding: 10px 16px;
+    border-radius: 12px;
+    /*max-width: 400px;*/
+    color: white;
+}
+.avatarBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.av {
+    display: none;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: white;
+    text-align: right;
+}
+
+.messageText {
+    font-size: 14px;
+
+    color: white;
+    background-color: #005FCC;
+
+    padding: 10px 16px;
+    border-radius: 12px;
+
+}
+
+.time {
+    font-size: 10px;
+    margin-right: 56px; /* выравниваем по аватару */
+    margin-top: auto;
+    color: #888;
+}
