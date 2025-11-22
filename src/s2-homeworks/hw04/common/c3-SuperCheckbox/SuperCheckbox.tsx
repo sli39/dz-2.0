@@ -1,13 +1,67 @@
-import React, {
-    ChangeEvent,
-    DetailedHTMLProps,
-    InputHTMLAttributes,
-} from 'react'
+// import React, {
+//     ChangeEvent,
+//     DetailedHTMLProps,
+//     InputHTMLAttributes,
+// } from 'react'
+// import s from './SuperCheckbox.module.css'
+//
+// // тип пропсов обычного инпута
+// type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
+//     HTMLInputElement>
+//
+// type SuperCheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
+//     onChangeChecked?: (checked: boolean) => void
+//     spanClassName?: string
+// }
+//
+// const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
+//     {
+//         onChange,
+//         onChangeChecked,
+//         className,
+//         spanClassName,
+//         children, // в эту переменную попадёт текст, типизировать не нужно так как он затипизирован в React.FC
+//         id,
+//
+//         ...restProps // все остальные пропсы попадут в объект restProps
+//     }
+// ) => {
+//     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+//         // задачка на написание онченджа
+//
+//     }
+//
+//     const finalInputClassName = s.checkbox
+//         + (className ? ' ' + className : '')
+//
+//     return (
+//         <label className={s.label}>
+//             <input
+//                 id={id}
+//                 type={'checkbox'}
+//                 onChange={onChangeCallback}
+//                 className={finalInputClassName}
+//                 {...restProps} // отдаём инпуту остальные пропсы если они есть (checked например там внутри)
+//             />
+//             {children && (
+//                 <span
+//                     id={id ? id + '-span' : undefined}
+//                     className={s.spanClassName}
+//                 >
+//                     {children}
+//                 </span>
+//             )}
+//         </label> // благодаря label нажатие на спан передастся в инпут
+//     )
+// }
+//
+// export default SuperCheckbox
+
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react'
 import s from './SuperCheckbox.module.css'
 
 // тип пропсов обычного инпута
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 type SuperCheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
     onChangeChecked?: (checked: boolean) => void
@@ -20,19 +74,17 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
         onChangeChecked,
         className,
         spanClassName,
-        children, // в эту переменную попадёт текст, типизировать не нужно так как он затипизирован в React.FC
+        children, // текст внутри чекбокса
         id,
-
-        ...restProps // все остальные пропсы попадут в объект restProps
+        ...restProps
     }
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        // задачка на написание онченджа
-
+        onChange?.(e) // стандартный onChange
+        onChangeChecked?.(e.currentTarget.checked) // колбэк с checked
     }
 
-    const finalInputClassName = s.checkbox
-        + (className ? ' ' + className : '')
+    const finalInputClassName = s.checkbox + (className ? ' ' + className : '')
 
     return (
         <label className={s.label}>
@@ -41,18 +93,19 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
                 type={'checkbox'}
                 onChange={onChangeCallback}
                 className={finalInputClassName}
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (checked например там внутри)
+                {...restProps} // все остальные пропсы (checked, disabled и т.д.)
             />
             {children && (
                 <span
                     id={id ? id + '-span' : undefined}
-                    className={s.spanClassName}
+                    className={spanClassName}
                 >
                     {children}
                 </span>
             )}
-        </label> // благодаря label нажатие на спан передастся в инпут
+        </label>
     )
 }
 
 export default SuperCheckbox
+

@@ -1,17 +1,19 @@
-import React from 'react'
-import {pureAddUserCallback} from '../HW3'
-
-let initialState: any[]
-const setName = (a: any[]) => {
-    initialState = a
-}
-
-beforeEach(() => {
-    initialState = []
-})
+import { pureAddUserCallback, UserType } from '../HW3'
 
 test('name 1', () => {
-    pureAddUserCallback('name', setName, initialState)
+    const initialState: UserType[] = []
+
+    const setUsers = (newUsers: UserType[] | ((prev: UserType[]) => UserType[])) => {
+        if (typeof newUsers === 'function') {
+            // если вызвали с функцией (как React делает), вызываем её с текущим состоянием
+            initialState.push(...newUsers(initialState))
+        } else {
+            initialState.push(...newUsers)
+        }
+    }
+
+    pureAddUserCallback('name', setUsers, initialState)
+
     expect(initialState.length).toBe(1)
     expect(initialState[0].name).toBe('name')
     expect(!!initialState[0]._id).toBe(true)
